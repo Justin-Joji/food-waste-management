@@ -1,5 +1,5 @@
 # Food Waste Management Project
-A simple and aesthetically designed website for the purpose of easy and accessible collection of food waste from localities.
+A website with an aesthetic UI to support easy collection of food waste and leftovers submitted by local users.
 
 ## Features
 + Submitting food submission requests through detailed forms
