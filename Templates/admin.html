@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title> Profile Page </title>
+        <meta charset='utf-8'>
+        <link rel='stylesheet' href='../static/admin.css'>
+    	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+	</head>
+	<body>
+		<header>
+			<img src='../static/assets/logo.png'>
+			<p>GIVEAT</p>
+		</header>
+		
+		<div class='main-body'>
+			<aside class='menu'>
+				<ul>
+					<li>
+					<button type='button' class='menu-button selected' id='detailsbtn'>
+						PERSONAL INFO
+					</button>
+					</li>
+					
+					<li>
+					<button type='button' class='menu-button' id='accountbtn'>
+						MANAGE ACCOUNTS
+					</button>
+					</li>
+					
+					<li>
+					<button type='button' class='menu-button' id='requestbtn'>
+						MANAGE REQUESTS
+					</button>
+					</li>
+					
+					<li>
+					<button type='button' class='menu-button' id='notifybtn'>
+						NOTIFY NGOS
+					</button>
+					</li>
+				</ul>
+			</aside>
+
+			<content>
+				<div class='profile on-screen' id='profileDiv'>
+					<div class='details'>
+						<h1>{{record.name}}</h1>
+						<p>Administrator</p>
+						
+						<h2> Account ID </h2>
+						<p>{{record.accid}}</p>
+						
+						<h2> Email Address </h2> 
+						<p>{{record.email}}</p>
+					</div>
+					<div class='picture'>
+						<img src='../static/assets/profile.png'>
+					</div>
+				</div>
+				<div class='operation' id='manageAcc'>
+					{% if acclist %}
+						{% for acc in acclist %}
+							<div class='bubble'>
+								<table class='bubble-text'>
+									<tr>
+										<th>AccountID</th><td>{{acc[0]}}</td>
+									</tr>
+									<tr>
+										<th>Name</th><td>{{acc[1]}}</td>
+									</tr>
+									<tr>
+										<th>Email</th><td>{{acc[2]}}</td>
+									</tr>
+									<tr>
+										<th>Role</th><td>{{acc[4]}}</td>
+									</tr>
+								</table>
+								{% if acc[4] != 'Admin' %}
+									<div>
+										<button type='button' class='remove-button' id='rmvaccbtn' onclick="{{ url_for('remove_acc', recid=record.accid, id=acc[0]) }}">Remove Account</button>
+									</div>
+								{% endif %}
+							</div>
+						{% endfor %}
+					{% else %}
+						<p> There are no user accounts yet </p>
+					{% endif %}
+				</div>
+				
+				<div class='operation' id='manageReq'>
+					{% if reqlist %}
+						{% for req in reqlist %}
+							<div class='bubble'>
+								<table class='bubble-text'>
+									<tr>
+										<th>RequestID</th><td>{{req[0]}}</td>
+									</tr>
+									<tr>
+										<th>Name</th><td>{{req[1]}}</td>
+									</tr>
+									<tr>
+										<th>Email</th><td>{{req[2]}}</td>
+									</tr>
+									<tr>
+										<th>Phone</th><td>{{req[3]}}</td>
+									</tr>
+									<tr>
+										<th>Address</th><td>{{req[4]}}</td>
+									</tr>
+									<tr>
+										<th>Category</th><td>{{req[5]}}</td>
+									</tr>
+									<tr>
+										<th>Quantity</th><td>{{req[6]}}</td>
+									</tr>
+									<tr>
+										<th>Prepared</th><td>{{req[7]}}</td>
+									</tr>
+								</table>
+								<div>
+									<button type='button' class='remove-button' id='rmvaccbtn' onclick="{{ url_for('remove_req', recid=record.accid, id=req[0]) }}">Remove Request</button>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						<p> No new requests have been submitted </p>
+					{% endif %}
+				</div>
+				
+				<div class='notify' id='notifyNGO'>
+					<p> No goods to donate to NGOs </p>
+				</div>
+			</content>
+		</div>
+		
+		<footer>
+			<div class='footlinks'>
+		   	    <h4>Quick Links</h4>
+		        <ul>
+		  	        <li><a href='/login'>Login</a></li>
+		            <li><a href='/donate'>Donate</a></li>
+		            <li><a href='/contact'>Contact Us</a></li>
+		   		</ul>
+			</div>
+	
+	        <div class='footlinks'>
+	    	    <h4>Connect</h4>
+	    	    <div class='social'>
+					<!-- Add socials if exist, else remove-->
+	    	    	<a href='' target='_blank'><i class='bx bxl-github'></i></a>
+	    	        <a href='' target='_blank'><i class='bx bxl-instagram' ></i></a>
+	                <a href='' target='_blank'><i class='bx bxl-twitter' ></i></a>
+	                <a href='' target='_blank'><i class='bx bxl-youtube' ></i></a>
+	            </div>
+	    	</div>
+		</footer>
+	</body>
+	
+	<script>
+		let detailsbtn = document.getElementById('detailsbtn');
+		let accountbtn = document.getElementById('accountbtn');
+		let requestbtn = document.getElementById('requestbtn');
+		let notifybtn = document.getElementById('notifybtn');
+		let profileDiv = document.getElementById('profileDiv');
+		let accountDiv = document.getElementById('manageDiv');
+		let rmvaccbtn = document.getElementById('rmvaccbtn');
+		
+		let selectedList = document.getElementsByClassName('selected');
+		let onscreenList = document.getElementsByClassName('on-screen');
+		
+		detailsbtn.onclick = function() {
+			if (detailsbtn.classList.contains('selected')) {
+				return
+			}
+			selectedList[0].classList.remove('selected');
+			detailsbtn.classList.add('selected');
+			
+			onscreenList[0].style.display = 'none';
+			profileDiv.style.display = 'flex';
+			
+			onscreenList[0].classList.remove('on-screen');
+			profileDiv.classList.add('on-screen');
+		}
+		
+		accountbtn.onclick = function() {
+			if (accountbtn.classList.contains('selected')) {
+				return
+			}
+			selectedList[0].classList.remove('selected');
+			accountbtn.classList.add('selected');
+			
+			onscreenList[0].style.display = 'none';
+			manageAcc.style.display = 'flex';
+			
+			onscreenList[0].classList.remove('on-screen');
+			manageAcc.classList.add('on-screen');
+		}
+		
+		requestbtn.onclick = function() {
+			if (requestbtn.classList.contains('selected')) {
+				return
+			}
+			selectedList[0].classList.remove('selected');
+			requestbtn.classList.add('selected');
+			
+			onscreenList[0].style.display = 'none';
+			manageReq.style.display = 'flex';
+			
+			onscreenList[0].classList.remove('on-screen');
+			manageReq.classList.add('on-screen');
+		}
+		
+		notifybtn.onclick = function() {
+			if (notifybtn.classList.contains('selected')) {
+				return
+			}
+			selectedList[0].classList.remove('selected');
+			notifybtn.classList.add('selected');
+			
+			onscreenList[0].style.display = 'none';
+			notifyNGO.style.display = 'flex';
+			
+			onscreenList[0].classList.remove('on-screen');
+			notifyNGO.classList.add('on-screen');
+		}
+	</script>
+</html>

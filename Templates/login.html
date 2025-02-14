@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>Login</title>
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="../static/login.css">
+    </head>
+    
+    <body>
+        <div class="form-box">
+            <h1 id="title">Register</h1>
+            <form action ="{{ url_for('login') }}" onsubmit="return verifyPassword()", method='POST'>
+                <div class="input-group">
+                    <input type="text" name="username" class="input-field" id="nameField" placeholder="Name" required>
+                    <input type="email" name="useremail" class="input-field" placeholder="Email" required>
+                   	<input type="password" name="userpwd" class="input-field" id="passField" placeholder="Password" required>
+                   	<input type="password" class="input-field" id="confirmPass" placeholder="Confirm Password" required>
+                   	<input type="text" name="usercode" class="input-field" id="codeField" placeholder="Enter special code if you have it">
+        	       	
+					<!--
+        	       	<p id="forgotPara" style="display: none">Forgot password?&nbsp; <a href="#">Click Here</a></p>
+					-->
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" id="registerbtn" name="account" value="Register">
+						<span id="regMain">Register</span>
+						<span id="regLink" class="link-text"></span>
+					</button>
+                    <button type="button" id="signinbtn" class="disable" name="account" value="SignIn">
+						<span id="signMain">Already have an account?</span>
+						<span id="signLink" class="link-text">Sign In</span>
+					</button>
+                </div>
+            </form>
+			{% with messages = get_flashed_messages() %}  
+				{% if messages %}  
+					{% for msg in messages %}  
+						<p id="err-msg">{{ msg }}</p>  
+					{% endfor %}  
+				{% endif %}  
+			{% endwith %}
+        </div>    
+    </body>
+    
+    <script>
+		let title = document.getElementById("title");
+		let nameField = document.getElementById("nameField");
+		let passField = document.getElementById("passField");
+		let confirmPass = document.getElementById("confirmPass");
+		let codeField = document.getElementById("codeField");
+		
+		// let forgotPara = document.getElementById("forgotPara");
+		let regMain = document.getElementById("regMain");
+		let regLink = document.getElementById("regLink");
+		let signMain = document.getElementById("signMain");
+		let signLink = document.getElementById("signLink");
+		
+		let registerbtn = document.getElementById("registerbtn");
+		let signinbtn = document.getElementById("signinbtn");
+
+		
+		signinbtn.onclick = function(){
+			if (signinbtn.type == "button") {
+				title.innerHTML = "Sign In";
+				nameField.required = false;
+				confirmPass.required = false;
+				nameField.style.display = "none";
+				confirmPass.style.display = "none";
+				codeField.style.display = "none";
+				
+				// forgotPara.style.display = "flex";
+				regMain.innerHTML = "Don't have an account?";
+				regLink.innerHTML = "Register";
+				signMain.innerHTML = "Sign In";
+				signLink.innerHTML = "";
+				
+				registerbtn.classList.add("disable");
+				signinbtn.classList.remove("disable");
+				
+				registerbtn.type = "button";
+				signinbtn.type = "submit";
+				
+				return false;
+			}
+			// else its a submit button, then it returns true by default
+		}
+		
+		registerbtn.onclick = function(){
+			if (registerbtn.type == "button") {
+				title.innerHTML = "Register";
+				nameField.style.display = "flex";
+				confirmPass.style.display = "flex";
+				codeField.style.display = "flex";
+				
+				// forgotPara.style.display = "none";
+				regMain.innerHTML = "Register";
+				regLink.innerHTML = "";
+				signMain.innerHTML = "Already have an account?";
+				signLink.innerHTML = "Sign in";
+				
+				registerbtn.classList.remove("disable");
+				signinbtn.classList.add("disable");
+				
+				registerbtn.type = "submit";
+				signinbtn.type = "button";
+				
+				return false;
+			}
+			//else its a submit button, then it returns true by default
+		}
+		
+		function verifyPassword() {
+			if ((passField.value != confirmPass.value) && (registerbtn.type == "submit")) {
+				alert("Passwords don't match, please try again.")
+				return false;
+			}
+		}
+	</script>
+</html>

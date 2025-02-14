@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title> Profile Page </title>
+        <meta charset='utf-8'>
+        <link rel='stylesheet' href='../static/donor.css'>
+    	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+	</head>
+	<body>
+		<header>
+			<img src='../static/assets/logo.png'>
+			<p>GIVEAT</p>
+		</header>
+		
+		<div class='main-body'>
+			<aside class='menu'>
+				<ul>
+					<li>
+					<button type='button' class='menu-button selected' id='detailsbtn'>
+						PERSONAL INFO
+					</button>
+					</li>
+					
+					<li>
+					<button type='button' class='menu-button' id='historybtn'>
+						DONATION HISTORY
+					</button>
+					</li>
+				</ul>
+			</aside>
+
+			<content>
+				<div class='profile' id='profileDiv'>
+					<div class='details'>
+						<h1>{{record.name}}</h1>
+						<p>Standard User</p>
+						
+						<h2> Account ID </h2>
+						<p>{{record.accid}}</p>
+						
+						<h2> Email Address </h2> 
+						<p>{{record.email}}</p>
+					</div>
+					<div class='picture'>
+						<img src='../static/assets/profile.png'>
+					</div>
+				</div>
+				
+				<div class='history' id='historyDiv'>
+					<p> There are no donations yet </p>
+				</div>
+			</content>
+		</div>
+		
+		<footer>
+			<div class='footlinks'>
+		   	    <h4>Quick Links</h4>
+		        <ul>
+		  	        <li><a href='/login'>Login</a></li>
+		            <li><a href='/donate'>Donate</a></li>
+		            <li><a href='/contact'>Contact Us</a></li>
+		   		</ul>
+			</div>
+	
+	        <div class='footlinks'>
+	    	    <h4>Connect</h4>
+	    	    <div class='social'>
+					<!-- Add socials if exist, else remove-->
+	    	    	<a href='' target='_blank'><i class='bx bxl-github'></i></a>
+	    	        <a href='' target='_blank'><i class='bx bxl-instagram' ></i></a>
+	                <a href='' target='_blank'><i class='bx bxl-twitter' ></i></a>
+	                <a href='' target='_blank'><i class='bx bxl-youtube' ></i></a>
+	            </div>
+	    	</div>
+		</footer>
+	</body>
+	
+	<script>
+		let detailsbtn = document.getElementById('detailsbtn');
+		let historybtn = document.getElementById('historybtn');
+		let profileDiv = document.getElementById('profileDiv');
+		let historyDiv = document.getElementById('historyDiv');
+		
+		detailsbtn.onclick = function() {
+			if (detailsbtn.classList.contains('selected')) {
+				return
+			}
+			historybtn.classList.remove('selected');
+			detailsbtn.classList.add('selected');
+			
+			historyDiv.style.display = 'none';
+			profileDiv.style.display = 'flex';
+		}
+		
+		historybtn.onclick = function() {
+			if (historybtn.classList.contains('selected')) {
+				return
+			}
+			detailsbtn.classList.remove('selected');
+			historybtn.classList.add('selected');
+			
+			profileDiv.style.display = 'none';
+			historyDiv.style.display = 'flex';
+		}
+	</script>
+</html>

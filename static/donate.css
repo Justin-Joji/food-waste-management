@@ -1,0 +1,245 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+body{
+    background-image: linear-gradient(rgb(10, 10, 30), rgb(20, 20, 50));
+
+}
+
+.register-body{
+    padding: 110px 30%;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.register-form{
+    color: white;
+    font-size: 20px;
+}
+
+.register-form h1{
+    font-size: 40px;
+    color: #ff6347;
+    margin-bottom: 20px;
+}
+
+.register-form form input, textarea{
+	width: 300px;
+    color: white;
+    padding: 17px;
+    background-color: rgb(7,7,28);
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    
+}
+.register-form h4{
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 20px;
+	margin-bottom: 10px;
+    color: #ff6347;
+}
+
+.option {
+	padding-left: 25px;
+	margin-bottom: 15px;
+	position: relative;
+	display: block;
+}
+
+#last-option {
+	margin-bottom: 30px;
+}
+
+.option input {
+	z-index: 1;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-155px, 4px);
+	opacity: 0;
+}
+
+.option label{
+	position: relative;
+	padding-left: 30px;
+	cursor: pointer;
+}
+
+.check {
+	position: absolute;
+	top: 1px;
+	left: 10px;
+	height: 20px;
+	width: 20px;
+	background: #fff;
+	border-radius: 50%;
+}
+
+/* .check is somewhere inside .option */
+.option:hover .check{
+	background: #aaa;
+}
+
+/* .check is sibling of .option input */
+.option input:checked ~ .check{
+	background: #ff6347;
+}
+
+.check:after {
+	content: "";
+	position: absolute;
+	display: none;
+	top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.option input:checked ~ .check:after {
+	display: block;
+}
+
+.register-form form textarea{
+	width: 400px;
+	height: 125px;
+	resize: none;
+}
+
+#box {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	height: 20px;
+	width: 20px;
+	background: #fff;
+}
+
+.option:hover #box {
+	background: #aaa;
+}
+
+.option input:checked ~ #box{
+	background: #ff6347;
+}
+
+#box:after {
+	content: "";
+	position: absolute;
+	display: none;
+	top: 2px;
+	left: 6px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	transform: rotate(45deg);
+}
+
+.option input:checked ~ #box:after {
+	display: block;
+}
+
+.register-form form .submitbtn{
+    display: inline-block;
+    background-color: #ff4500;
+    font-size: 27px;
+    font-weight: 600px;
+    border: 2px solid transparent;
+    border-radius: 60px;
+    width: 220px;
+    cursor: pointer;
+	margin: 5px;
+    transition: ease 0.30s;
+}
+
+.register-form form .submitbtn:hover{
+    border: 2px solid #ff4500;
+    background-color: transparent;
+}
+
+/* Footer */
+.footer{
+    margin-top: 80px;
+    background-image: linear-gradient(rgb(10, 10, 30), rgb(20, 20, 50));
+}
+
+.foot{
+    padding: 20px 0;
+}
+
+.footer-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+
+.footlinks h4{
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+
+.footlinks h4::before{
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 70px;
+    left: 0;
+    bottom: -7px;
+    background: white;
+}
+
+.footlinks ul li{
+    margin-bottom: 15px;
+}
+
+.footlinks ul li a{
+    font-size: 17px;
+    color: #dddddd;
+    display: block;
+    transition: ease 0.30s;
+}
+
+.footlinks ul li a:hover{
+    transform: translate(6px);
+    color: #ff6347;
+}
+
+.social a{
+    font-size: 25px;
+    margin: 4px;
+    height: 40px;
+    width: 40px;
+    color: #ff6347;
+    background-color: #1a1a40;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: ease 0.30s;
+}
+
+.social a:hover{
+    transform: scale(1.2);
+}
+
+
+
+
+    

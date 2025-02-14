@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Donate Food</title>
+        <meta charset="UTF-8">
+    	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="../static/donate.css">
+    </head>
+    
+    <body>
+		<section class="register-body">
+   			<div class="register-form">
+        		<h1>Donate food</h1>
+        		<form action="{{ url_for('donate') }}" onsubmit="return validateform()" method="POST">
+        			<input type="text" name="myname" placeholder="Your Name" id="name" required>
+        			<input type="email" name="myemail" placeholder="Your Email" required>
+        			<input type="tel" name="myphone" placeholder="Your Phone No." id="phonenum" required>
+        			<input type="text" name="myaddr" placeholder="Collection Address" required>
+        			
+        			<h4>Category</h4>
+					<div class="option">
+						<input type="radio" name="myfood" value="Veg" required>
+						<label for="veg">Veg</label>
+						<span class="check"></span>
+					</div>
+					<div class="option">
+						<input type="radio" name="myfood" value="NonVeg">
+						<label for="nonveg">Non-Veg</label>
+						<span class="check"></span>
+					</div>
+					<div class="option" id="last-option">
+						<input type="radio" name="myfood" value="Both"> 
+						<label for="both">Both</label>
+						<span class="check"></span>
+					</div>
+        
+        			<h4>Quanity (in Kg)</h4>
+        			<input type="number" name="quantity" min=1 value=1>
+        
+        			<h4>Food Preparation Date</h4>
+        			<input type="date" name="fooddate" required> <br>
+        			<textarea name="note" placeholder="Special Note"></textarea> <br>
+					<div class="option">
+						<input type="checkbox" name="t&c" id="terms" required>
+						<label for="terms">I accept the Terms &amp; Conditions.</label>
+						<span id="box"></span>
+					</div>
+        			<input type="submit" value="Submit" class="submitbtn">
+				</form>
+				
+				<!-- To check whether form data is being read
+				{% with messages = get_flashed_messages() %}  
+					{% if messages %}  
+						{% for msg in messages %}  
+							<p>{{ msg }}</p>  
+						{% endfor %}  
+					{% endif %}  
+				{% endwith %}
+				-->
+    		</div>
+		</section>
+		
+		<section class="footer">
+    		<div class="foot">
+        		<div class="footer-content">
+           		    <div class="footlinks">
+                		<h4>Quick Links</h4>
+                		<ul>
+                    		<li><a href="/">Home</a></li>
+                    		<li><a href="/about">About Us</a></li>
+                    		<li><a href="/contact">Contact Us</a></li>
+                		</ul>
+            		</div>
+            		<div class="footlinks">
+                		<h4>Connect</h4>
+                		<div class="social">
+							<!-- Add socials if exist, else remove-->
+                    		<a href="" target="_blank"><i class='bx bxl-github'></i></a>
+                    		<a href="" target="_blank"><i class='bx bxl-instagram' ></i></a>
+                    		<a href="" target="_blank"><i class='bx bxl-twitter' ></i></a>
+                    		<a href="" target="_blank"><i class='bx bxl-youtube' ></i></a>
+                		</div>
+            		</div>
+        		</div>
+    		</div>
+    	</section>
+	</body>
+
+	<!-- Javascript -->
+	<script>
+		function validateform() { 
+			let name = document.getElementById("name").value;
+  		  	let tel = document.getElementById("phonenum").value;
+
+			let regex = /[a-zA-Z]+$/;
+			if (!regex.test(name)) {
+				alert("Name should only consist of alphabets.");
+				return false;
+			}
+
+   			if (tel.length < 10) {  
+        		alert("Phone number must be of atleast 10 digits.");  
+        		return false;  
+    		}
+			else if (isNaN(tel)) {
+        		alert("Phone number should not include characters.");
+        		return false;
+    		}
+    		return true;
+		}  
+	</script>
+</html>
